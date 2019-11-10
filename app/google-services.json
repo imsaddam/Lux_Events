@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "135300956021",
+    "firebase_url": "https://lux-event.firebaseio.com",
+    "project_id": "lux-event",
+    "storage_bucket": "lux-event.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135300956021:android:ba4c91cb665d7faa58dd3c",
+        "android_client_info": {
+          "package_name": "com.imsaddam.luxevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135300956021-escdc0b5vjf14408b791l6pf6gb920jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB82xeDOLQkcuYStXyfjU80q_FJe9bVGgI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135300956021-escdc0b5vjf14408b791l6pf6gb920jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

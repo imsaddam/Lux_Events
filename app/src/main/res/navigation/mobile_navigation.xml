@@ -12,32 +12,40 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/my_event"
         android:name="com.imsaddam.luxevents.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:label="@string/my_event"
+        tools:layout="@layout/fragment_myevents" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/create_event"
         android:name="com.imsaddam.luxevents.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:label="@string/create_event"
+        tools:layout="@layout/fragment_create_event" />
 
     <fragment
-        android:id="@+id/nav_tools"
+        android:id="@+id/inbox"
         android:name="com.imsaddam.luxevents.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:label="@string/inbox"
+        tools:layout="@layout/fragment_inbox" />
 
     <fragment
-        android:id="@+id/nav_share"
+        android:id="@+id/promotion"
         android:name="com.imsaddam.luxevents.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:label="@string/promotion"
+        tools:layout="@layout/fragment_promotion" />
 
     <fragment
-        android:id="@+id/nav_send"
+        android:id="@+id/help"
         android:name="com.imsaddam.luxevents.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:label="@string/help"
+        tools:layout="@layout/fragment_help" />
+
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.imsaddam.luxevents.ui.send.SendFragment"
+        android:label="@string/setting"
+        tools:layout="@layout/fragment_setting" />
+
+
 </navigation>
