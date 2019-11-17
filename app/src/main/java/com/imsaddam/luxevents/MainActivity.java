@@ -16,6 +16,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.imsaddam.luxevents.ui.createEvent.ViewEventFragment;
 import com.imsaddam.luxevents.ui.login.LoginActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -29,12 +31,24 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    private FirebaseAuth auth;
+    public static FirebaseUser firebaseUser;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        auth = FirebaseAuth.getInstance();
+
+
+        if (auth.getCurrentUser() == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+        }
+        firebaseUser= auth.getCurrentUser();
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        navigationView.getMenu().findItem(R.id.my_event).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+
+                return false;
+            }
+        });
+
 
     }
 
@@ -83,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         finish();
 
     }
+
+
 
 
 
