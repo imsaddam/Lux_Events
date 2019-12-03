@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/my_event"
-        android:name="com.imsaddam.luxevents.ui.gallery.GalleryFragment"
+        android:name="com.imsaddam.luxevents.ui.createEvent.EventsListFragment"
         android:label="@string/my_event"
         tools:layout="@layout/fragment_myevents" />
 
     <fragment
         android:id="@+id/create_event"
-        android:name="com.imsaddam.luxevents.ui.slideshow.SlideshowFragment"
+        android:name="com.imsaddam.luxevents.ui.createEvent.CreateEventFragment"
         android:label="@string/create_event"
         tools:layout="@layout/fragment_create_event" />
 

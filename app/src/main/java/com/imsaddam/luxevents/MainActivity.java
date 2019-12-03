@@ -1,6 +1,7 @@
 package com.imsaddam.luxevents;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.imsaddam.luxevents.ui.createEvent.EventsListFragment;
 import com.imsaddam.luxevents.ui.createEvent.ViewEventFragment;
 import com.imsaddam.luxevents.ui.login.LoginActivity;
 
@@ -28,7 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EventsListFragment.OnFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
@@ -82,14 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        navigationView.getMenu().findItem(R.id.my_event).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
 
-
-                return false;
-            }
-        });
 
 
     }
@@ -137,5 +132,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
