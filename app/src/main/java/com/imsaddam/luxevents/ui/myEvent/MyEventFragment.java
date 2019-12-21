@@ -1,4 +1,4 @@
-package com.imsaddam.luxevents.ui.gallery;
+package com.imsaddam.luxevents.ui.myEvent;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.imsaddam.luxevents.R;
 
-public class GalleryFragment extends Fragment {
+public class MyEventFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private MyEventViewModel myEventViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
+        myEventViewModel =
+                ViewModelProviders.of(this).get(MyEventViewModel.class);
         View root = inflater.inflate(R.layout.fragment_myevents, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
+        myEventViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

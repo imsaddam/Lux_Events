@@ -1,16 +1,16 @@
-package com.imsaddam.luxevents.ui.gallery;
+package com.imsaddam.luxevents.ui.myEvent;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class MyEventViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public MyEventViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is myEvent fragment");
     }
 
     public LiveData<String> getText() {

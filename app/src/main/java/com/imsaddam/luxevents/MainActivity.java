@@ -19,7 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.imsaddam.luxevents.ui.createEvent.EventsListFragment;
-import com.imsaddam.luxevents.ui.createEvent.ViewEventFragment;
+import com.imsaddam.luxevents.ui.createEvent.OtherEventsListFragment;
 import com.imsaddam.luxevents.ui.login.LoginActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -30,7 +30,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements EventsListFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements EventsListFragment.OnFragmentInteractionListener, OtherEventsListFragment.OnFragmentInteractionListener
+{
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
@@ -67,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements EventsListFragmen
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.my_event, R.id.create_event,
-                R.id.inbox, R.id.promotion, R.id.help, R.id.setting)
+               R.id.my_event, R.id.create_event,
+                R.id.other_events, R.id.promotion, R.id.help, R.id.setting)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

@@ -27,13 +27,10 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,7 +43,6 @@ import com.imsaddam.luxevents.models.Event;
 import com.imsaddam.luxevents.models.EventLocation;
 import com.imsaddam.luxevents.utils.ToastHelper;
 import com.shivtechs.maplocationpicker.LocationPickerActivity;
-import com.shivtechs.maplocationpicker.MapUtility;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -60,7 +56,7 @@ public class CreateEventFragment extends Fragment  {
 
     private Uri filePath;
     private ImageView imageView;
-    EditText eventNameInput, eventDescriptionInput, selectVenuBtn;
+    EditText eventNameInput, eventDescriptionInput, saveVenue;
     DatePicker eventDate;
     TimePicker eventTime;
     Button btnChoose, eventSaveButton;
@@ -105,7 +101,7 @@ public class CreateEventFragment extends Fragment  {
         eventDescriptionInput = rootView.findViewById(R.id.discription);
 
         eventSaveButton = rootView.findViewById(R.id.saveBtn);
-        selectVenuBtn = rootView.findViewById(R.id.venue);
+        saveVenue = rootView.findViewById(R.id.create_venue);
         eventSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +109,7 @@ public class CreateEventFragment extends Fragment  {
             }
         });
 
-//        selectVenuBtn.setOnClickListener(new View.OnClickListener() {
+//        saveVenue.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                getCurrentPlaceItems();
@@ -198,7 +194,7 @@ public class CreateEventFragment extends Fragment  {
         if(eventNameInput.getText().toString().isEmpty() ||
                 eventDescriptionInput.getText().toString().isEmpty() ||
                 spinner.getSelectedItemPosition() < 0 ||
-                selectVenuBtn.getText().toString().isEmpty())
+                saveVenue.getText().toString().isEmpty())
         {
             ToastHelper.showRedToast(getContext(),"Please fill all the required field.");
             return;
@@ -216,7 +212,7 @@ public class CreateEventFragment extends Fragment  {
                     eventTime.getCurrentHour(),
                     eventTime.getCurrentMinute());
 
-            ref.setValue(new Event(eventNameInput.getText().toString(),"No image", eventDescriptionInput.getText().toString(),spinner.getSelectedItemPosition(),selectVenuBtn.getText().toString(), calendar.getTime()))
+            ref.setValue(new Event(eventNameInput.getText().toString(),"No image", eventDescriptionInput.getText().toString(),spinner.getSelectedItemPosition(),calendar.getTime(),saveVenue.getText().toString()))
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

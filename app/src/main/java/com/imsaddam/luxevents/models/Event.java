@@ -8,31 +8,78 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @IgnoreExtraProperties
 public class Event implements Serializable, Parcelable {
 
-    String key,title,image, description;
+    String key,title,image, description,venue;
     int category;
     Date eventAddedDate;
     Date eventDate;
     User eventAddedBy;
     String location;
 
+    List<String> likedId;
+    List<Comment> comments;
+
     //constructor
     public Event(){}
 
     //getter and setters press Alt+Insert
 
-    public Event(String title, String image, String description,int category, String location, Date eventDate) {
+    public Event(String title, String image, String description,int category, Date eventDate, String venue) {
         this.title = title;
         this.image = image;
         this.description = description;
+        this.venue = venue;
         this.category = category;
-        this.location = location;
         this.eventDate = eventDate;
         this.eventAddedDate = Calendar.getInstance().getTime();
+
     }
+
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(key);
+        parcel.writeString(title);
+        parcel.writeString(image);
+        parcel.writeString(description);
+        parcel.writeString(venue);
+        parcel.writeInt(category);
+        parcel.writeString(location);
+        parcel.writeValue(eventAddedBy);
+        parcel.writeList(comments);
+        parcel.writeList(likedId);
+
+    }
+
+
+    protected Event(Parcel in) {
+        key = in.readString();
+        title = in.readString();
+        image = in.readString();
+        description = in.readString();
+        venue = in.readString();
+        category = in.readInt();
+        location = in.readString();
+        eventAddedBy = (User)in.readValue(User.class.getClassLoader());
+        comments = in.readArrayList(Comment.class.getClassLoader());
+        likedId = in.readArrayList(String.class.getClassLoader());
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -58,6 +105,13 @@ public class Event implements Serializable, Parcelable {
         this.description = description;
     }
 
+    public String getVenue() {
+        return venue;
+    }
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
     public Date getEventAddedDate() {
         return eventAddedDate;
     }
@@ -74,7 +128,21 @@ public class Event implements Serializable, Parcelable {
         this.eventDate = eventDate;
     }
 
+    public List<String> getLikedId() {
+        return likedId;
+    }
 
+    public void setLikedId(List<String> likedId) {
+        this.likedId = likedId;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public User getEventAddedBy() {
         return eventAddedBy;
@@ -97,11 +165,6 @@ public class Event implements Serializable, Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
-
     public int getCategory() {
         return category;
     }
@@ -118,3 +181,4 @@ public class Event implements Serializable, Parcelable {
         this.location = location;
     }
 }
+

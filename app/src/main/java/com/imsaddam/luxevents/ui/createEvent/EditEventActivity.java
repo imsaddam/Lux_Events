@@ -1,20 +1,14 @@
 package com.imsaddam.luxevents.ui.createEvent;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,16 +19,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,7 +33,6 @@ import com.imsaddam.luxevents.MainActivity;
 import com.imsaddam.luxevents.R;
 import com.imsaddam.luxevents.models.Event;
 import com.imsaddam.luxevents.utils.ToastHelper;
-import com.shivtechs.maplocationpicker.LocationPickerActivity;
 import com.shivtechs.maplocationpicker.MapUtility;
 import com.squareup.picasso.Picasso;
 
@@ -54,7 +41,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-public class EditEventFragment extends Fragment {
+public class EditEventActivity extends AppCompatActivity {
 
     private static final int LOC_REQ_CODE = 1;
     private static final int ADDRESS_PICKER_REQUEST = 1020;
@@ -63,10 +50,10 @@ public class EditEventFragment extends Fragment {
 
     private Uri filePath;
     private ImageView imageView;
-    EditText eventNameInput, eventDescriptionInput, selectVenuBtn;
+    EditText eventNameInput, eventDescriptionInput, saveVenue;
     DatePicker eventDate;
     TimePicker eventTime;
-    FloatingActionButton eventSaveButton;
+    Button eventSaveButton;
     Button btnChoose, selectPlaceBtn;
     Spinner spinner;
    // EventLocation location;
@@ -79,51 +66,28 @@ public class EditEventFragment extends Fragment {
 
     private static final String EVENT = "event";
 
-    public static EditEventFragment newInstance(Event event){
-        EditEventFragment mFragment = new EditEventFragment();
-        Bundle mBundle = new Bundle();
-        mBundle.putParcelable(EVENT, event);
-        mFragment.setArguments(mBundle);
-        return mFragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            event = getArguments().getParcelable(EVENT);
-        }
-    }
+        setContentView(R.layout.fragment_create_event);
+        Bundle b = getIntent().getBundleExtra("viewEvent");
+        event = b.getParcelable("event");
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        getActivity().setTitle("Update Event");
-        // TODO Auto-generated method stub
-        View rootView = inflater.inflate(R.layout.fragment_create_event, container, false);
-
-       // MapUtility.apiKey = getResources().getString(R.string.google_maps_key);
-
-        spinner = (Spinner) rootView.findViewById(R.id.category_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+        spinner = (Spinner) findViewById(R.id.category_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.event_category_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
 
 
-        eventNameInput = rootView.findViewById(R.id.text_create_event);
-        eventDescriptionInput = rootView.findViewById(R.id.discription);
+        eventNameInput = findViewById(R.id.text_create_event);
+        eventDescriptionInput = findViewById(R.id.discription);
 
-        eventSaveButton = rootView.findViewById(R.id.saveBtn);
-        selectVenuBtn = rootView.findViewById(R.id.venue);
-        eventSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateEvent();
-            }
-        });
+        eventSaveButton = findViewById(R.id.saveBtn);
+        eventSaveButton.setText("Update Event");
         eventSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,8 +95,9 @@ public class EditEventFragment extends Fragment {
             }
         });
 
-        btnChoose = (Button) rootView.findViewById(R.id.btnChoose);
-        imageView = (ImageView) rootView.findViewById(R.id.eventImage);
+
+        btnChoose = (Button) findViewById(R.id.btnChoose);
+        imageView = (ImageView) findViewById(R.id.eventImage);
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,29 +106,16 @@ public class EditEventFragment extends Fragment {
             }
         });
 
-        selectPlaceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              // getCurrentPlaceItems();
-            }
-        });
 
-        eventDate = (DatePicker) rootView.findViewById(R.id.eventDate);
-        eventTime = (TimePicker) rootView.findViewById(R.id.eventTime);
 
+        eventDate = (DatePicker) findViewById(R.id.eventDate);
+        eventTime = (TimePicker) findViewById(R.id.eventTime);
+
+        saveVenue = findViewById(R.id.create_venue);
         setValue();
-
-        rootView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT ));
-        return rootView;
     }
 
-  /*  private void getCurrentPlaceItems() {
-        if (isLocationAccessPermitted()) {
-            showPlacePicker();
-        } else {
-            requestLocationAccessPermission();
-        }
-    }*/
+
 
     @SuppressLint("MissingPermission")
    /* private void showPlacePicker() {
@@ -175,21 +127,6 @@ public class EditEventFragment extends Fragment {
 
     }*/
 
-    private boolean isLocationAccessPermitted() {
-        if (ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private void requestLocationAccessPermission() {
-        ActivityCompat.requestPermissions(getActivity(),
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                LOC_REQ_CODE);
-    }
 
 
 
@@ -198,6 +135,8 @@ public class EditEventFragment extends Fragment {
         eventNameInput.setText(event.getTitle());
         eventDescriptionInput.setText(event.getDescription());
         spinner.setSelection(event.getCategory());
+        saveVenue.setText(event.getVenue());
+
 
         if(event.getEventDate() != null)
         {
@@ -237,7 +176,7 @@ public class EditEventFragment extends Fragment {
         {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
             }
             catch (IOException e)
@@ -268,9 +207,9 @@ public class EditEventFragment extends Fragment {
         if(eventNameInput.getText().toString().isEmpty() ||
                 eventDescriptionInput.getText().toString().isEmpty() ||
                 spinner.getSelectedItemPosition() < 0 ||
-                selectVenuBtn.getText().toString().isEmpty())
+                saveVenue.getText().toString().isEmpty())
         {
-            ToastHelper.showRedToast(getContext(),"Please fill all the required field.");
+            ToastHelper.showRedToast(getApplicationContext(),"Please fill all the required field.");
             return;
         }
 
@@ -288,6 +227,7 @@ public class EditEventFragment extends Fragment {
 
             event.setTitle(eventNameInput.getText().toString());
             event.setDescription(eventDescriptionInput.getText().toString());
+            event.setVenue(saveVenue.getText().toString());
             event.setCategory(spinner.getSelectedItemPosition());
             event.setImage(event.getImage() == null? "No image" : event.getImage());
             //event.setLocation(location);
@@ -302,15 +242,15 @@ public class EditEventFragment extends Fragment {
                                 uploadImage(ref);
                             }
                             else{
-                                Toast.makeText(getContext(), "Event is updated.", Toast.LENGTH_SHORT).show();
-                                gotoEventListFragment();
+                                Toast.makeText(getApplicationContext(), "Event is updated.", Toast.LENGTH_SHORT).show();
+                                gotoEventListFragment(event);
                             }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), "Error: " + e.getMessage(),
+                            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -319,25 +259,22 @@ public class EditEventFragment extends Fragment {
 
     }
 
-    private void gotoEventListFragment(){
-        Fragment fragment = ViewEventFragment.newInstance(event);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    private void gotoEventListFragment(Event event){
+        Intent i = new Intent(getApplicationContext(), ViewEventActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("event",event);
+        i.putExtra("viewEvent",b);
+        startActivity(i);
     }
 
     private void uploadImage(final DatabaseReference ref) {
 
         if(filePath != null)
         {
-            storage = FirebaseStorage.getInstance("gs://event-manager-eef75.appspot.com");
+            storage = FirebaseStorage.getInstance("gs://lux-event.appspot.com");
             storageReference = storage.getReference();
 
-            final ProgressDialog progressDialog = new ProgressDialog(getContext());
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
+
 
             final StorageReference sRef = storageReference.child("images/"+ ref.getKey());
             sRef.putFile(filePath)
@@ -352,31 +289,31 @@ public class EditEventFragment extends Fragment {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     event.setImage(uri.toString());
-                                                    Toast.makeText(getContext(), "Event is updated.",
+                                                    Toast.makeText(getApplicationContext(), "Event is updated.",
                                                             Toast.LENGTH_SHORT).show();
-                                                    gotoEventListFragment();
+                                                    gotoEventListFragment(event);
 
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(getContext(), "Error: " + e.getMessage(),
+                                                    Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(),
                                                             Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 }
                             });
 
-                            progressDialog.dismiss();
+                           // progressDialog.dismiss();
                             //Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                          //  progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -384,7 +321,7 @@ public class EditEventFragment extends Fragment {
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                           // progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
         }

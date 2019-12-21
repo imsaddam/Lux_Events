@@ -20,9 +20,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.imsaddam.luxevents.MainActivity;
 import com.imsaddam.luxevents.R;
+import com.imsaddam.luxevents.adapter.RecyclerViewAdapter;
 import com.imsaddam.luxevents.models.Comment;
 import com.imsaddam.luxevents.models.Event;
-import com.imsaddam.luxevents.adapter.RecyclerViewAdapter;
 import com.imsaddam.luxevents.models.User;
 
 import java.util.ArrayList;
@@ -33,8 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 
-
-public class EventsListFragment extends Fragment {
+public class OtherEventsListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "isAllEvents";
@@ -57,7 +56,7 @@ public class EventsListFragment extends Fragment {
     private boolean mSearchCheck;
 
 
-    public EventsListFragment() {
+    public OtherEventsListFragment() {
         // Required empty public constructor
     }
 
@@ -69,8 +68,8 @@ public class EventsListFragment extends Fragment {
      * @return A new instance of fragment EventsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsListFragment newInstance(boolean isAllEvents) {
-        EventsListFragment fragment = new EventsListFragment();
+    public static OtherEventsListFragment newInstance(boolean isAllEvents) {
+        OtherEventsListFragment fragment = new OtherEventsListFragment();
         Bundle args = new Bundle();
         args.putBoolean(ARG_PARAM1, isAllEvents);
         fragment.setArguments(args);
@@ -124,14 +123,7 @@ public class EventsListFragment extends Fragment {
 
         //send Query to FirebaseDatabase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        if(isAllEvents)
-        {
-            mRef = mFirebaseDatabase.getReference("users");
-            //mRef = mFirebaseDatabase.getReference("users/"+ MainActivity.firebaseUser.getUid()+"/events");
-
-        }else{
-            mRef = mFirebaseDatabase.getReference("users").orderByKey().equalTo(MainActivity.firebaseUser.getUid());
-        }
+        mRef = mFirebaseDatabase.getReference("users");
 
         events= new ArrayList<>();
         mRef.addValueEventListener(new ValueEventListener() {
@@ -147,7 +139,6 @@ public class EventsListFragment extends Fragment {
                     {
                         User user = postSnapshot.getValue(User.class);
                         user.setKey(postSnapshot.getKey());
-
                         for (DataSnapshot eventSnap: postSnapshot.child("events").getChildren()) {
                             Event event = eventSnap.getValue(Event.class);
                             event.setKey(eventSnap.getKey());

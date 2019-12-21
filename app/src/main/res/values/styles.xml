@@ -35,12 +35,6 @@
     </style>
 
 
-    <style name="PageTitleSmall" parent="@android:style/TextAppearance.Material.Title">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/display_bold</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:letterSpacing">0.05</item>
-    </style>
     <style name="H1" parent="@android:style/TextAppearance.Material.Headline">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/charcoal</item>
@@ -48,38 +42,6 @@
     <style name="H2" parent="@android:style/TextAppearance.Material.Headline">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/charcoal</item>
-    </style>
-    <style name="H3" parent="@android:style/TextAppearance.Material.Headline">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/charcoal</item>
-    </style>
-
-    <style name="P2" parent="@android:style/TextAppearance.Material.Body2">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/charcoal</item>
-    </style>
-    <style name="H2Bold" parent="@android:style/TextAppearance.Material.Headline">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/charcoal</item>
-    </style>
-
-    <style name="OrgName" parent="@android:style/TextAppearance.Material.Headline">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/gray</item>
-    </style>
-
-
-
-    <style name="mainButtonSelected" parent="P1">
-        <item name="android:clickable">true</item>
-        <item name="android:stateListAnimator">@animator/button</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:padding">@dimen/spacing_l</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/bg_round_button_red</item>
     </style>
 
 

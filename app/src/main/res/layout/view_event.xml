@@ -5,15 +5,6 @@
     android:background="#e1e1e1"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dip"
@@ -26,6 +17,7 @@
             android:layout_weight="2"
             android:background="@color/colorPrimary"
             android:gravity="center"
+            android:onClick="btnBack"
             android:orientation="vertical" >
 
             <ImageView
@@ -153,15 +145,14 @@
 
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:id="@+id/title"
-                        android:layout_height="wrap_content"
-                        android:text="Title"
-                        android:padding="10dp"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:id="@+id/title"
+                            android:layout_height="wrap_content"
+                            android:text="Title"
+                            android:textColor="#000"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -190,7 +181,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Date"
-                        android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -204,8 +194,9 @@
     <LinearLayout
 
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_margin="2dip"
+        android:layout_weight="1.5"
         android:background="#fff"
         android:orientation="horizontal" >
 
@@ -224,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dip"
                 android:inputType="textMultiLine"
-                android:minEms="200"
+                android:minEms="50"
                 android:textAlignment="center"
                 android:text="Description"
                 android:textColor="#000"
@@ -249,8 +240,9 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:id="@+id/view_venue"
+            android:layout_weight="2"
             android:padding="10dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -292,100 +284,15 @@
             android:padding="10dp"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+
+            />
 
 
 
     </LinearLayout>
 
-
-        <LinearLayout
-
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dip"
-            android:background="#fff"
-            android:padding="10dp"
-            android:orientation="horizontal" >
-
-
-            <ImageButton
-                android:id="@+id/like"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:src="@drawable/like"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/numGoing"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="number of like"
-                android:padding="10dp"
-                android:layout_height="wrap_content"/>
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dip"
-            android:background="#fff"
-            android:padding="10dp"
-            android:orientation="horizontal" >
-
-
-            <EditText
-                android:id="@+id/commentText"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:id="@+id/commentButton"
-                android:layout_weight="1"
-                android:text="Comment"
-                android:textSize="15dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"/>
-
-
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dip"
-            android:background="#fff"
-            android:padding="10dp"
-            android:orientation="horizontal" >
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/commentRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="532dp"
-                android:layout_marginTop="10dp" />
-
-
-
-
-
-        </LinearLayout>
-
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/eventEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -393,9 +300,5 @@
         android:layout_marginRight="30dp"
         android:layout_gravity="right"
         android:src="@drawable/edit" />
-
-    </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>

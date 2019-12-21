@@ -16,9 +16,8 @@ public class User implements Serializable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String name, String phone, String email) {
+    public User(String name,  String email) {
         this.name = name;
-        this.phone = phone;
         this.email = email;
     }
 

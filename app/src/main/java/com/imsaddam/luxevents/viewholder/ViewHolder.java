@@ -1,4 +1,4 @@
-package com.imsaddam.luxevents.models;
+package com.imsaddam.luxevents.viewholder;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -7,11 +7,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.imsaddam.luxevents.R;
+import com.imsaddam.luxevents.models.ClickListener;
 
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView title, description,eventDate, eventLocation;
+    public TextView title, description,eventDate, eventLocation,EventUser;
     public ImageView eventImage;
 
     public ViewHolder(View itemView) {
@@ -29,6 +30,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         // eventLocation = (TextView) itemView.findViewById(R.id.eventLocation);
         eventDate = (TextView) itemView.findViewById(R.id.eventDate);
         eventImage = (ImageView) itemView.findViewById(R.id.rImageView);
+        EventUser = itemView.findViewById(R.id.event_created_By);
     }
 
     private ClickListener mClickListener;
