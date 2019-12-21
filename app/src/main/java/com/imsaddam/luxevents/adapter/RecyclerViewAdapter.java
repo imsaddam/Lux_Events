@@ -1,21 +1,23 @@
-package com.imsaddam.luxevents.models;
+package com.imsaddam.luxevents.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.imsaddam.luxevents.R;
-import com.imsaddam.luxevents.ui.createEvent.ViewEventFragment;
+import com.imsaddam.luxevents.models.ClickListener;
+import com.imsaddam.luxevents.models.Event;
+import com.imsaddam.luxevents.ui.createEvent.ViewEventActivity;
 import com.imsaddam.luxevents.utils.DateHelper;
+import com.imsaddam.luxevents.viewholder.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -44,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.setOnClickListener(new ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-               // gotoViewEventFragment(events.get(position));
+                gotoViewEventFragment(events.get(position));
             }
         });
 
@@ -53,12 +55,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     private void gotoViewEventFragment(Event event){
-        Fragment fragment = ViewEventFragment.newInstance(event);
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        Intent i = new Intent(context, ViewEventActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("event",event);
+        i.putExtra("viewEvent",b);
+       context.startActivity(i);
     }
 
     @Override
@@ -77,6 +78,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
        // holder.description.setText(event.getDescription() == null ? "" : event.getDescription());
        // holder.eventLocation.setText(event.getLocation() == null ? "" : event.getLocation());
         holder.eventDate.setText(event.getEventDate() == null ? "" : DateHelper.dateToString(event.getEventDate()));
+        holder.EventUser.setText(event.getEventAddedBy().getName());
     }
 
     @Override
