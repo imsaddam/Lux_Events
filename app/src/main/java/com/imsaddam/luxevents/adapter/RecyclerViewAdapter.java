@@ -51,32 +51,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
         });
 
 
+        // its reperents the individual row in the list from adapter view
         return viewHolder;
     }
 
-    private void gotoViewEventFragment(Event event){
+    // Its shows the individual event details
+
+    private void gotoViewEventFragment(Event event) {
         Intent i = new Intent(context, ViewEventActivity.class);
         Bundle b = new Bundle();
-        b.putParcelable("event",event);
-        i.putExtra("viewEvent",b);
-       context.startActivity(i);
+        b.putParcelable("event", event);
+        i.putExtra("viewEvent", b);
+        context.startActivity(i);
     }
 
+
+    // render only one event at a time from the full list
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Event event = events.get(position);
-        try{
+        try {
             Picasso.get().load(event.getImage()).into(holder.eventImage);
-        }catch (Exception ex)
-        {
-            holder.eventImage.setImageDrawable(this.context.getResources().getDrawable(R.drawable.evetn_manager_icon,null));
-            Log.d("Error","Invalid Image");
+        } catch (Exception ex) {
+            holder.eventImage.setImageDrawable(this.context.getResources().getDrawable(R.drawable.evetn_manager_icon, null));
+            Log.d("Error", "Invalid Image");
         }
 
         holder.title.setText(event.getTitle() == null ? "" : event.getTitle());
-       // holder.description.setText(event.getDescription() == null ? "" : event.getDescription());
-       // holder.eventLocation.setText(event.getLocation() == null ? "" : event.getLocation());
+        // holder.description.setText(event.getDescription() == null ? "" : event.getDescription());
+        // holder.eventLocation.setText(event.getLocation() == null ? "" : event.getLocation());
         holder.eventDate.setText(event.getEventDate() == null ? "" : DateHelper.dateToString(event.getEventDate()));
         holder.EventUser.setText(event.getEventAddedBy().getName());
     }
@@ -86,7 +90,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         return events.size();
     }
-
 
 
 }

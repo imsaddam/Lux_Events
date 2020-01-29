@@ -12,7 +12,7 @@ import com.imsaddam.luxevents.models.ClickListener;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView title, description,eventDate, eventLocation,EventUser;
+    public TextView title, description, eventDate, eventLocation, EventUser;
     public ImageView eventImage;
 
     public ViewHolder(View itemView) {
@@ -36,7 +36,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     private ClickListener mClickListener;
 
 
-    public void setOnClickListener(ClickListener clickListener){
+    public void setOnClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
     }
 }

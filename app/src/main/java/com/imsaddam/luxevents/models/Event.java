@@ -13,7 +13,7 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Event implements Serializable, Parcelable {
 
-    String key,title,image, description,venue;
+    String key, title, image, description, venue;
     int category;
     Date eventAddedDate;
     Date eventDate;
@@ -24,11 +24,12 @@ public class Event implements Serializable, Parcelable {
     List<Comment> comments;
 
     //constructor
-    public Event(){}
+    public Event() {
+    }
 
     //getter and setters press Alt+Insert
 
-    public Event(String title, String image, String description,int category, Date eventDate, String venue) {
+    public Event(String title, String image, String description, int category, Date eventDate, String venue) {
         this.title = title;
         this.image = image;
         this.description = description;
@@ -64,7 +65,7 @@ public class Event implements Serializable, Parcelable {
         venue = in.readString();
         category = in.readInt();
         location = in.readString();
-        eventAddedBy = (User)in.readValue(User.class.getClassLoader());
+        eventAddedBy = (User) in.readValue(User.class.getClassLoader());
         comments = in.readArrayList(Comment.class.getClassLoader());
         likedId = in.readArrayList(String.class.getClassLoader());
     }
@@ -108,6 +109,7 @@ public class Event implements Serializable, Parcelable {
     public String getVenue() {
         return venue;
     }
+
     public void setVenue(String venue) {
         this.venue = venue;
     }

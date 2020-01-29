@@ -30,26 +30,25 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements EventsListFragment.OnFragmentInteractionListener, OtherEventsListFragment.OnFragmentInteractionListener
-{
+public class MainActivity extends AppCompatActivity implements EventsListFragment.OnFragmentInteractionListener, OtherEventsListFragment.OnFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private FirebaseAuth auth;
-    public static FirebaseUser firebaseUser;
+    private FirebaseAuth auth; // Firebase Authentication provides backend services, easy-to-use SDKs
+    public static FirebaseUser firebaseUser; // retrieve profile information, as well as to manage that user's authentication state.
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance(); // initialize the FirebaseAuth instance.
 
 
         if (auth.getCurrentUser() == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         }
-        firebaseUser= auth.getCurrentUser();
+        firebaseUser = auth.getCurrentUser();
 
 
         setContentView(R.layout.activity_main);
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements EventsListFragmen
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-               R.id.my_event, R.id.create_event,
+                R.id.my_event, R.id.create_event,
                 R.id.other_events, R.id.promotion, R.id.help, R.id.setting)
                 .setDrawerLayout(drawer)
                 .build();
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements EventsListFragmen
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-       //logoutItem = findViewById(R.id.logout);
+        //logoutItem = findViewById(R.id.logout);
         navigationView.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -86,13 +85,10 @@ public class MainActivity extends AppCompatActivity implements EventsListFragmen
         });
 
 
-
-
     }
 
 
-
-    private void logOut(){
+    private void logOut() {
 
         FirebaseAuth.getInstance().signOut();
 
@@ -101,10 +97,9 @@ public class MainActivity extends AppCompatActivity implements EventsListFragmen
         startActivity(logoutIntent);
         finish();
 
+        // Method for logout activity
+
     }
-
-
-
 
 
     @Override

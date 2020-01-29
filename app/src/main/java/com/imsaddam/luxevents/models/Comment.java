@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Comment  implements Serializable {
+public class Comment implements Serializable {
 
     public User user;
     public String comments;

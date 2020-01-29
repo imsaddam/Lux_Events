@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
         inputUser = findViewById(R.id.username);
         inputPassword = findViewById(R.id.password);
         loginBtn = findViewById(R.id.login);
@@ -59,11 +58,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                loginUser(inputUser.getText().toString(),inputPassword.getText().toString());
+                loginUser(inputUser.getText().toString(), inputPassword.getText().toString());
 
             }
         });
-
 
 
         linkSignup = findViewById(R.id.link_signup);
@@ -74,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
 
 
     }
@@ -91,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser currentUser) {
     }
 
-    private void loginUser(String email, String password){
+    private void loginUser(String email, String password) {
 
 
         mAuth.signInWithEmailAndPassword(email, password)

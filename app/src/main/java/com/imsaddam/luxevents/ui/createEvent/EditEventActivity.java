@@ -56,7 +56,7 @@ public class EditEventActivity extends AppCompatActivity {
     Button eventSaveButton;
     Button btnChoose, selectPlaceBtn;
     Spinner spinner;
-   // EventLocation location;
+    // EventLocation location;
 
     private Event event;
 
@@ -67,11 +67,13 @@ public class EditEventActivity extends AppCompatActivity {
     private static final String EVENT = "event";
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_create_event);
+
+
+        //get parametter from incoming intent
         Bundle b = getIntent().getBundleExtra("viewEvent");
         event = b.getParcelable("event");
 
@@ -80,7 +82,6 @@ public class EditEventActivity extends AppCompatActivity {
                 R.array.event_category_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
 
 
         eventNameInput = findViewById(R.id.text_create_event);
@@ -107,14 +108,12 @@ public class EditEventActivity extends AppCompatActivity {
         });
 
 
-
         eventDate = (DatePicker) findViewById(R.id.eventDate);
         eventTime = (TimePicker) findViewById(R.id.eventTime);
 
         saveVenue = findViewById(R.id.create_venue);
         setValue();
     }
-
 
 
     @SuppressLint("MissingPermission")
@@ -128,18 +127,14 @@ public class EditEventActivity extends AppCompatActivity {
     }*/
 
 
-
-
-    private void setValue()
-    {
+    private void setValue() {
         eventNameInput.setText(event.getTitle());
         eventDescriptionInput.setText(event.getDescription());
         spinner.setSelection(event.getCategory());
         saveVenue.setText(event.getVenue());
 
 
-        if(event.getEventDate() != null)
-        {
+        if (event.getEventDate() != null) {
             Calendar c = Calendar.getInstance();
             c.setTime(event.getEventDate());
 
@@ -149,18 +144,18 @@ public class EditEventActivity extends AppCompatActivity {
 
         }
         //location = event.getLocation();
-       // eventLocation.setText(event.getLocation().getAddress());
+        // eventLocation.setText(event.getLocation().getAddress());
 
-        try{
+        try {
             Picasso.get().load(event.getImage()).into(imageView);
-        }catch (Exception ex)
-        {
-            Log.d("Error","Invalid Image");
+        } catch (Exception ex) {
+            Log.d("Error", "Invalid Image");
         }
 
     }
 
 
+    // call the mobile gallary for image selection
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -168,19 +163,18 @@ public class EditEventActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
+
+    // after image selection what to do with image in this stage
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
-                && data != null && data.getData() != null )
-        {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
+                && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -201,23 +195,22 @@ public class EditEventActivity extends AppCompatActivity {
     }
 
 
-    private void updateEvent(){
+
+    private void updateEvent() {
 
 
-        if(eventNameInput.getText().toString().isEmpty() ||
+        if (eventNameInput.getText().toString().isEmpty() ||
                 eventDescriptionInput.getText().toString().isEmpty() ||
                 spinner.getSelectedItemPosition() < 0 ||
-                saveVenue.getText().toString().isEmpty())
-        {
-            ToastHelper.showRedToast(getApplicationContext(),"Please fill all the required field.");
+                saveVenue.getText().toString().isEmpty()) {
+            ToastHelper.showRedToast(getApplicationContext(), "Please fill all the required field.");
             return;
         }
 
-        if(MainActivity.firebaseUser !=null)
-        {
+        if (MainActivity.firebaseUser != null) {
 
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference ref = database.getReference("users/"+ MainActivity.firebaseUser.getUid()+"/events/"+event.getKey());
+            final DatabaseReference ref = database.getReference("users/" + MainActivity.firebaseUser.getUid() + "/events/" + event.getKey());
 
             Calendar calendar = new GregorianCalendar(eventDate.getYear(),
                     eventDate.getMonth(),
@@ -229,7 +222,7 @@ public class EditEventActivity extends AppCompatActivity {
             event.setDescription(eventDescriptionInput.getText().toString());
             event.setVenue(saveVenue.getText().toString());
             event.setCategory(spinner.getSelectedItemPosition());
-            event.setImage(event.getImage() == null? "No image" : event.getImage());
+            event.setImage(event.getImage() == null ? "No image" : event.getImage());
             //event.setLocation(location);
             event.setEventDate(calendar.getTime());
 
@@ -237,11 +230,9 @@ public class EditEventActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            if(filePath != null)
-                            {
+                            if (filePath != null) {
                                 uploadImage(ref);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getApplicationContext(), "Event is updated.", Toast.LENGTH_SHORT).show();
                                 gotoEventListFragment(event);
                             }
@@ -254,29 +245,29 @@ public class EditEventActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
-            Log.d("Ename",eventNameInput.getText().toString());
+            Log.d("Ename", eventNameInput.getText().toString());
         }
 
     }
 
-    private void gotoEventListFragment(Event event){
+
+    //after update event its show the list of event
+    private void gotoEventListFragment(Event event) {
         Intent i = new Intent(getApplicationContext(), ViewEventActivity.class);
         Bundle b = new Bundle();
-        b.putParcelable("event",event);
-        i.putExtra("viewEvent",b);
+        b.putParcelable("event", event);
+        i.putExtra("viewEvent", b);
         startActivity(i);
     }
 
     private void uploadImage(final DatabaseReference ref) {
 
-        if(filePath != null)
-        {
+        if (filePath != null) {
             storage = FirebaseStorage.getInstance("gs://lux-event.appspot.com");
             storageReference = storage.getReference();
 
 
-
-            final StorageReference sRef = storageReference.child("images/"+ ref.getKey());
+            final StorageReference sRef = storageReference.child("images/" + ref.getKey());
             sRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -305,23 +296,23 @@ public class EditEventActivity extends AppCompatActivity {
                                 }
                             });
 
-                           // progressDialog.dismiss();
+                            // progressDialog.dismiss();
                             //Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                          //  progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            //  progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                     .getTotalByteCount());
-                           // progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            // progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
         }

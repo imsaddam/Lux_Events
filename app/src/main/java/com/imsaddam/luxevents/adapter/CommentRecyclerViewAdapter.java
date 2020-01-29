@@ -49,7 +49,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentView
         User user = comment.getUser();
         holder.name.setText(user.getName() == null ? "" : user.getName());
         holder.comment.setText(comment.getComments() == null ? "" : comment.getComments());
-        holder.commentDate.setText(comment.getAddedDate() == null ? "" : DateHelper.dateToString( comment.getAddedDate()));
+        holder.commentDate.setText(comment.getAddedDate() == null ? "" : DateHelper.dateToString(comment.getAddedDate()));
 
     }
 

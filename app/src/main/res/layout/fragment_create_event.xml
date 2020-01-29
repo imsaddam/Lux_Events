@@ -1,4 +1,3 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,182 +10,174 @@
         android:layout_height="wrap_content">
 
 
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_height="match_parent">
-
-
-
-
-    <EditText
-        android:id="@+id/text_create_event"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-
-        android:layout_marginLeft="10dp"
-        android:hint="Enter Name of Event">
-    </EditText>
-
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:weightSum="3"
-            android:layout_marginBottom="20dp">
-
-            <ImageView
-                android:id="@+id/eventImage"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_launcher"
-                android:layout_weight="2"/>
-
-            <Button
-                android:id="@+id/btnChoose"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Event Image"
-                android:textAllCaps="false"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Select Category"
-                android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            </TextView>
-            <Spinner
-                android:id="@+id/category_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Date"
-                android:layout_gravity="center_vertical">
-
-            </TextView>
-            <DatePicker
-                android:id="@+id/eventDate"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:calendarViewShown="false"
-                android:datePickerMode="spinner"
-                android:spinnersShown="true"
-                android:tooltipText="Select Date"
-                >
-            </DatePicker>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+                <EditText
+                    android:id="@+id/text_create_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_marginTop="30dp"
+                    android:hint="Enter Name of Event"></EditText>
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/eventImage"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:src="@mipmap/ic_launcher"
+                        android:contentDescription="TODO" />
+
+                    <Button
+                        android:id="@+id/btnChoose"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Event Image"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Select Category">
+
+                    </TextView>
+
+                    <Spinner
+                        android:id="@+id/category_spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Event Date">
+
+                    </TextView>
+
+                    <DatePicker
+                        android:id="@+id/eventDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:spinnersShown="true"
+                        android:tooltipText="Select Date"
+                        tools:targetApi="o"></DatePicker>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Event Time">
+
+                    </TextView>
+
+                    <TimePicker
+                        android:id="@+id/eventTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:timePickerMode="spinner" />
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/create_venue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="20"
+                    android:hint="Venue" />
+
+
+                <EditText
+                    android:id="@+id/discription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:autoSizeTextType="uniform"
+                    android:ems="50"
+                    android:gravity="start|top"
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    android:minHeight="200dp"
+                    tools:targetApi="o" />
+
+
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    android:background="#0D203B"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Create Event"
+                    android:textColor="#fff"
+                    android:textSize="20sp">
+
+
+                </Button>
+            </LinearLayout>
+
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Event Time"
-                android:layout_gravity="center_vertical">
-
-            </TextView>
-            <TimePicker
-                android:id="@+id/eventTime"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:timePickerMode="spinner"/>
-        </LinearLayout>
-
-
-
-
-
-    <EditText
-        android:id="@+id/create_venue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:ems="20"
-        android:layout_marginTop="10dp"
-        android:hint="Venue" />
-
-
-
-
-
-    <EditText
-        android:id="@+id/discription"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:ems="50"
-        android:layout_marginTop="10dp"
-        android:hint="Description"
-        android:layout_marginLeft="10dp"
-        android:gravity="start|top"
-        android:inputType="textMultiLine" />
-
-
-
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="40dp"
-        android:text="Create Event"
-        android:id="@+id/saveBtn"
-        android:background="#0D203B"
-        android:textColor="#fff"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="20sp"
-        android:layout_height="wrap_content">
-
-
-    </Button>
-    </LinearLayout>
-
-
-
-</LinearLayout>
 
     </ScrollView>
 

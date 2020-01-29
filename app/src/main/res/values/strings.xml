@@ -27,5 +27,9 @@
         <item>Party</item>
         <item>Birthday</item>
         <item>Concert</item>
+        <item>Education</item>
+        <item>Workshop</item>
+        <item>Seminar</item>
+        <item>Others</item>
     </string-array>
 </resources>

@@ -26,7 +26,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     private ClickListener mClickListener;
 
 
-    public void setOnClickListener(ClickListener clickListener){
+    public void setOnClickListener(ClickListener clickListener) {
         mClickListener = clickListener;
     }
 }

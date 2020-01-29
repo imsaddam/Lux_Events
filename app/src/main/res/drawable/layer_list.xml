@@ -18,7 +18,8 @@
         android:bottom="@dimen/speech_bubble_corners_plus_tail"
         android:left="@dimen/speech_bubble_spacing"
         android:gravity="left"
-        android:width="@dimen/speech_bubble_corners">
+        android:width="@dimen/speech_bubble_corners"
+        tools:targetApi="m">
         <shape android:shape="rectangle">
             <solid android:color="@color/speech_bubble_agent"/>
         </shape>
@@ -28,7 +29,8 @@
         android:top="@dimen/speech_bubble_corners"
         android:bottom="@dimen/speech_bubble_corners_plus_tail"
         android:gravity="right"
-        android:width="@dimen/speech_bubble_corners">
+        android:width="@dimen/speech_bubble_corners"
+        tools:targetApi="m">
         <shape android:shape="rectangle">
             <solid android:color="@color/speech_bubble_agent"/>
         </shape>
@@ -38,7 +40,8 @@
         android:width="@dimen/speech_bubble_corners"
         android:height="@dimen/speech_bubble_corners"
         android:bottom="@dimen/speech_bubble_spacing"
-        android:gravity="bottom|right">
+        android:gravity="bottom|right"
+        tools:targetApi="m">
         <vector xmlns:android="http://schemas.android.com/apk/res/android"
             android:width="@dimen/speech_bubble_corners"
             android:height="@dimen/speech_bubble_corners"
@@ -53,7 +56,8 @@
     <item
         android:width="@dimen/speech_bubble_corners"
         android:height="@dimen/speech_bubble_corners"
-        android:gravity="top|right">
+        android:gravity="top|right"
+        tools:targetApi="m">
         <vector xmlns:android="http://schemas.android.com/apk/res/android"
             android:width="@dimen/speech_bubble_corners"
             android:height="@dimen/speech_bubble_corners"
@@ -69,7 +73,8 @@
         android:width="@dimen/speech_bubble_corners"
         android:height="@dimen/speech_bubble_corners"
         android:left="@dimen/speech_bubble_spacing"
-        android:gravity="top|left">
+        android:gravity="top|left"
+        tools:targetApi="m">
         <vector xmlns:android="http://schemas.android.com/apk/res/android"
             android:width="@dimen/speech_bubble_corners"
             android:height="@dimen/speech_bubble_corners"
@@ -86,7 +91,8 @@
     <item
         android:width="@dimen/speech_bubble_corners_plus_tail"
         android:height="@dimen/speech_bubble_corners_plus_tail"
-        android:gravity="bottom|left">
+        android:gravity="bottom|left"
+        tools:targetApi="m">
         <vector xmlns:android="http://schemas.android.com/apk/res/android"
             android:width="@dimen/speech_bubble_corners_plus_tail"
             android:height="@dimen/speech_bubble_corners_plus_tail"

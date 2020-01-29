@@ -38,7 +38,6 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         emailInput = findViewById(R.id.input_email);
         passwordInput = findViewById(R.id.input_password);
@@ -47,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 registerUser(nameInput.getText().toString(), emailInput.getText().toString(),passwordInput.getText().toString());
+                registerUser(nameInput.getText().toString(), emailInput.getText().toString(), passwordInput.getText().toString());
             }
         });
 
@@ -55,22 +54,22 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    private void registerUser(String name, final String email, String password){
+    private void registerUser(String name, final String email, String password) {
 
-        mAuth.createUserWithEmailAndPassword( email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
                             FirebaseUser firebaseUser = task.getResult().getUser();
-                            User user = new User(nameInput.getText().toString(),email);
+                            User user = new User(nameInput.getText().toString(), email);
                             mDatabase.child("users").child(firebaseUser.getUid()).setValue(user)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Log.d("Registration Successful", "createUserWithEmail:success");
-                                            Intent logingIntent = new Intent(getApplicationContext(),LoginActivity.class);
+                                            Intent logingIntent = new Intent(getApplicationContext(), LoginActivity.class);
                                             startActivity(logingIntent);
                                             finish();
                                         }
@@ -84,13 +83,12 @@ public class SignUpActivity extends AppCompatActivity {
                                     });
 
 
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Registration Failed", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                           // updateUI(null);
+                            // updateUI(null);
                         }
 
                         // ...

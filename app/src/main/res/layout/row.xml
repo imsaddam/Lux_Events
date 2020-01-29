@@ -48,7 +48,8 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:background="@mipmap/ic_launcher"/>
+            android:background="@mipmap/ic_launcher"
+            android:contentDescription="TODO" />
 
 
 

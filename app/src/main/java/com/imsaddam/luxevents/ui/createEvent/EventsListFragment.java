@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public class EventsListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +51,7 @@ public class EventsListFragment extends Fragment {
     Query mRef;
     List<Event> events = new ArrayList<>();
 
-    RecyclerView.Adapter adapter ;
+    RecyclerView.Adapter adapter;
 
     private boolean mSearchCheck;
 
@@ -85,7 +84,6 @@ public class EventsListFragment extends Fragment {
         }
 
 
-
         mSharedPref = getActivity().getSharedPreferences("SortSettings", Context.MODE_PRIVATE);
         String mSorting = mSharedPref.getString("Sort", "newest"); //where if no settingsis selected newest will be default
 
@@ -100,7 +98,6 @@ public class EventsListFragment extends Fragment {
             mLayoutManager.setReverseLayout(false);
             mLayoutManager.setStackFromEnd(false);
         }
-
 
 
     }
@@ -124,45 +121,43 @@ public class EventsListFragment extends Fragment {
 
         //send Query to FirebaseDatabase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        if(isAllEvents)
-        {
+        if (isAllEvents) {
             mRef = mFirebaseDatabase.getReference("users");
             //mRef = mFirebaseDatabase.getReference("users/"+ MainActivity.firebaseUser.getUid()+"/events");
 
-        }else{
+        } else {
             mRef = mFirebaseDatabase.getReference("users").orderByKey().equalTo(MainActivity.firebaseUser.getUid());
         }
 
-        events= new ArrayList<>();
+        events = new ArrayList<>();
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 events.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
                     Map<String, Object> objectMap = (HashMap<String, Object>)
                             postSnapshot.getValue();
 
-                    if(objectMap.containsKey("events"))
-                    {
+                    if (objectMap.containsKey("events")) {
                         User user = postSnapshot.getValue(User.class);
                         user.setKey(postSnapshot.getKey());
 
-                        for (DataSnapshot eventSnap: postSnapshot.child("events").getChildren()) {
+                        for (DataSnapshot eventSnap : postSnapshot.child("events").getChildren()) {
                             Event event = eventSnap.getValue(Event.class);
                             event.setKey(eventSnap.getKey());
                             event.setEventAddedBy(user);
 
-                            List<Comment> comments =  new ArrayList<>();
-                            for (DataSnapshot sharedUserSnap: eventSnap.child("comments").getChildren()) {
-                                Comment comment= sharedUserSnap.getValue(Comment.class);
+                            List<Comment> comments = new ArrayList<>();
+                            for (DataSnapshot sharedUserSnap : eventSnap.child("comments").getChildren()) {
+                                Comment comment = sharedUserSnap.getValue(Comment.class);
                                 comments.add(comment);
                             }
                             event.setComments(comments);
 
 
-                            List<String> likedList =  new ArrayList<>();
-                            for (DataSnapshot sharedUserSnap: eventSnap.child("likes").getChildren()) {
+                            List<String> likedList = new ArrayList<>();
+                            for (DataSnapshot sharedUserSnap : eventSnap.child("likes").getChildren()) {
                                 String userId = sharedUserSnap.getValue(String.class);
                                 likedList.add(userId);
                             }
@@ -182,9 +177,9 @@ public class EventsListFragment extends Fragment {
                     }
                 });
 
-                //events.sort((o1,o2) -> o1.getEventDate() == null ? 0 : o2.getEventDate() ==null ? 0 :  o1.getEventDate().compareTo(o2.getEventDate()));
+               // Customer adapter for showing the events
 
-                adapter = new RecyclerViewAdapter(getContext(),getActivity(), events);
+                adapter = new RecyclerViewAdapter(getContext(), getActivity(), events);
                 mRecyclerView.setAdapter(adapter);
 
 //                recyclerView.setAdapter(adapter);
@@ -242,17 +237,14 @@ public class EventsListFragment extends Fragment {
     //search data
     private void firebaseSearch(String searchText) {
         List<Event> eventList = new ArrayList<>();
-        for (Event event :events) {
-            if(event.getTitle() != null && event.getTitle().toLowerCase().contains(searchText.toLowerCase()))
-            {
+        for (Event event : events) {
+            if (event.getTitle() != null && event.getTitle().toLowerCase().contains(searchText.toLowerCase())) {
                 eventList.add(event);
             }
         }
-        adapter = new RecyclerViewAdapter(getContext(),getActivity(), eventList );
+        adapter = new RecyclerViewAdapter(getContext(), getActivity(), eventList);
         mRecyclerView.setAdapter(adapter);
     }
-
-
 
 
     @Override
@@ -277,8 +269,6 @@ public class EventsListFragment extends Fragment {
             return false;
         }
     };
-
-
 
 
 }
