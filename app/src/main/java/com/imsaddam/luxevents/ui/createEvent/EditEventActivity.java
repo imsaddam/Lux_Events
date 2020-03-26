@@ -263,7 +263,7 @@ public class EditEventActivity extends AppCompatActivity {
     private void uploadImage(final DatabaseReference ref) {
 
         if (filePath != null) {
-            storage = FirebaseStorage.getInstance("gs://lux-event.appspot.com");
+            storage = FirebaseStorage.getInstance("gs:Your Firebase Storage Link");
             storageReference = storage.getReference();
 
 
