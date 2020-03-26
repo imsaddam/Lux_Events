@@ -250,7 +250,7 @@ public class CreateEventFragment extends Fragment {
     private void uploadImage(final DatabaseReference ref) {
 
         if (filePath != null) {
-            storage = FirebaseStorage.getInstance("gs://lux-event.appspot.com");
+            storage = FirebaseStorage.getInstance("gs:Your Firebase Storage Link");
             storageReference = storage.getReference();
 
             final ProgressDialog progressDialog = new ProgressDialog(getContext());
